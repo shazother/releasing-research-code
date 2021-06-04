@@ -1,54 +1,33 @@
-# Tips for Publishing Research Code
-
-<img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/08/Logo_for_Conference_on_Neural_Information_Processing_Systems.svg/1200px-Logo_for_Conference_on_Neural_Information_Processing_Systems.svg.png" width=200>
-
-**💡 Collated best practices from most popular ML research repositories - *now official guidelines at NeurIPS 2021!*** 
-
-Based on analysis of more than 200 Machine Learning repositories, these recommendations facilitate reproducibility and correlate with GitHub stars - for more details, see our [our blog post](https://medium.com/paperswithcode/ml-code-completeness-checklist-e9127b168501). 
-
-For NeurIPS 2021 code submissions it is recommended (but not mandatory) to use the [README.md template](templates/README.md) and check as many items on the ML Code Completeness Checklist (described below) as possible. 
-
 ## 📋 README.md template
 
-We provide a [README.md template](templates/README.md) that you can use for releasing ML research repositories. The sections in the template were derived by looking at existing repositories, seeing which had the best reception in the community, and then looking at common components that correlate with popularity.
+This code is for replicating experiments presented in the paper 'Smart Systematic Investment Agent: an ensemble of deep learning and evolutionary strategies' and submmited to Nuerips2021. 
+This page contains step by step instructions on replicating the experiments presented in the paper and instructions on creating new ones to stress test the model.
+The code is written purely in python and all dependencies are included in requirements.txt or as an executable script.
 
-## ✓ ML Code Completeness Checklist
+#### 1. Dependencies
 
-We compiled this checklist by looking at what's common to the most popular ML research repositories. In addition, we prioritized items that facilitate reproducibility and make it easier for others build upon research code.
+The code is dependent on packages that can be installed by running the requirements file.
+To install requirements:
 
-The ML Code Completeness Checklist consists of five items:
+```setup
+pip install -r requirements.txt
+```
 
-1. **Specification of dependencies**
-2. **Training code** 
-3. **Evaluation code**
-4. **Pre-trained models**
-5. **README file including table of results accompanied by precise commands to run/produce those results**
+#### 2. Creating environment, espisoded and actions 
 
-We verified that repositories that check more items on the checklist also tend to have a higher number of GitHub stars. This was verified by analysing official NeurIPS 2019 repositories - more details in the [blog post](https://medium.com/paperswithcode/ml-code-completeness-checklist-e9127b168501). We also provide the [data](notebooks/code_checklist-neurips2019.csv) and [notebook](notebooks/code_checklist-analysis.pdf) to reproduce this analysis from the post. 
+This section covers section 2.1 - 2.4 of our paper. It generates episodic samples, does feature engineering, scaling and finds the optimal vector of action using genetic algorithm that is subsequently used as a training dataset for the nueral network.
 
-NeurIPS 2019 repositories that had all five of these components had the highest number of GitHub stars (median of 196 and mean of 2,664 stars). 
+```Generate solved episodes
+python Neurips_GA_Environment_Data_Creation.py
+```
 
-We explain each item on the checklist in detail blow. 
+#### 3. Training the neural network model
 
-#### 1. Specification of dependencies
+The next step is tp train the agent to learn the policy behind optimal action using a simple neural network and to save the model to disk.
 
-If you are using Python, this means providing a `requirements.txt` file (if using `pip` and `virtualenv`), providing `environment.yml` file (if using anaconda), or a `setup.py` if your code is a library. 
-
-It is good practice to provide a section in your README.md that explains how to install these dependencies. Assume minimal background knowledge and be clear and comprehensive - if users cannot set up your dependencies they are likely to give up on the rest of your code as well. 
-
-If you wish to provide whole reproducible environments, you might want to consider using Docker and upload a Docker image of your environment into Dockerhub. 
-
-#### 2. Training code
-
-Your code should have a training script that can be used to obtain the principal results stated in the paper. This means you should include hyperparameters and any tricks that were used in the process of getting your results. To maximize usefulness, ideally this code should be written with extensibility in mind: what if your user wants to use the same training script on their own dataset?
-
-You can provide a documented command line wrapper such as `train.py` to serve as a useful entry point for your users. 
-
-#### 3. Evaluation code
-
-Model evaluation and experiments often depend on subtle details that are not always possible to explain in the paper. This is why including the exact code you used to evaluate or run experiments is helpful to give a complete description of the procedure. In turn, this helps the user to trust, understand and build on your research.
-
-You can provide a documented command line wrapper such as `eval.py` to serve as a useful entry point for your users.
+```Train model and save to disk
+python nuerips_nn_training_upto_2020_data.py
+```
 
 #### 4. Pre-trained models
 
