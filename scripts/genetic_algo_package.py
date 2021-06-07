@@ -25,7 +25,6 @@ import numpy as np
 import sys
 import time
 from func_timeout import func_timeout, FunctionTimedOut
-import matplotlib.pyplot as plt
 
 ###############################################################################
 ###############################################################################
@@ -418,10 +417,10 @@ class geneticalgorithm():
         sys.stdout.write('\n\n Objective function:\n %s\n' % (self.best_function))
         sys.stdout.flush() 
         re=np.array(self.report)
-        plt.plot(re)
-        plt.xlabel('Iteration')
-        plt.ylabel('Objective function')
-        plt.title('Genetic Algorithm')
+        # plt.plot(re)
+        # plt.xlabel('Iteration')
+        # plt.ylabel('Objective function')
+        # plt.title('Genetic Algorithm')
         # plt.show()
         if self.stop_mniwi==True:
             sys.stdout.write('\nWarning: GA is terminated due to the'+\

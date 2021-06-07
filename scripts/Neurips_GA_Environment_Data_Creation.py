@@ -1,4 +1,3 @@
-
 import pandas_datareader as web
 import pandas as pd
 import numpy as np
@@ -12,8 +11,9 @@ from genetic_algo_package import geneticalgorithm as ga
 import sys, os
 
 #Configure ETF and Date
-ETF = 'VTI'
-END_DATE = '2019-12-31'
+ETF = str(sys.argv[1])
+END_DATE = str(sys.argv[2])
+EPISODES = int(sys.argv[3])
 
 # Disable print function
 def blockPrint():
@@ -60,7 +60,7 @@ data_compiled = []
 
 
 #Create 3,000 episodes and identify optimal action for each
-for i in range(3000):
+for i in range(EPISODES):
     blockPrint()
     def environment_sampler(inputlist=list_of_dates, lengthsample=30):
         '''
@@ -124,7 +124,7 @@ for i in range(3000):
     envr.append(environment)
     sclr.append(environment_scaler)
     enablePrint()
-    print(i,end ='\n')
+    print(str(i)+'/n')
 
 data_compiled = pd.concat([pd.concat(envr),pd.concat(sclr)],axis = 0, ignore_index=True)
 

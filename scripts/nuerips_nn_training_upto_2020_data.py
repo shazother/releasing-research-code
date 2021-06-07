@@ -20,12 +20,16 @@ from datetime import datetime
 from datetime import timedelta
 import sys, os
 
+ETF = str(sys.argv[1])
+END_DATE = str(sys.argv[2])
+TRAIN_EPOCHS = int(sys.argv[3])
+
 df = pd.read_csv('Modeling_data_for_'+ETF+'_'+END_DATE+'_.csv')
 
 df = df.copy().iloc[2:,1:]
 df = df.copy().fillna(0)
 
-df = df.copy().drop(['vol_chg','vol_chg_5ma','vol_chg_10ma','vol_chg_30ma'],axis=1)
+# df = df.copy().drop(['vol_chg','vol_chg_5ma','vol_chg_10ma','vol_chg_30ma'],axis=1)
 
 y = [] 
 X = []
@@ -104,7 +108,7 @@ model.add(Dropout(0.25))
 
 model.add(Dense(1, activation = 'sigmoid'))
 
-epochs = 150
+epochs = TRAIN_EPOCHS
 decay_rate = lr_schedule(epochs)
 momentum = 0.8
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
