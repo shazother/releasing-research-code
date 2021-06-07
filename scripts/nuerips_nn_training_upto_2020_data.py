@@ -121,6 +121,6 @@ model_json = model.to_json()
 with open("Neurips_agent_model.json", "w") as json_file:
     json_file.write(model_json)
 # serialize weights to HDF5
-model.save("Neurips_agent_model_2020_before_vF.h5")
+model.save("Neurips_agent_model_CUSTOM_MODEL.h5")
 print("Saved model to disk")
 

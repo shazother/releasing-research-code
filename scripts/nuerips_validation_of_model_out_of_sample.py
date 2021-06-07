@@ -14,6 +14,7 @@ from tensorflow.keras.models import load_model
 ETF = str(sys.argv[1])
 START_DATE = str(sys.argv[2])
 END_DATE = str(sys.argv[3])
+WHICH_MODEL = str(sys.argv[4])
 
 # Disable print function
 def blockPrint():
@@ -48,8 +49,11 @@ dates = stock_df.index.unique()
 dates_rel = stock_df[stock_df.index>START_DATE].index.unique()
 
 
+if WHICH_MODEL == 'PRE':
+  model = load_model('RL_agent_model_Neurips_2020before_vF.h5')
+else:
+  model = load_model('Neurips_agent_model_CUSTOM_MODEL.h5')
 
-model = load_model('RL_agent_model_Neurips_2020before_vF.h5')
 
 X=[]
 df_for_price=[]
