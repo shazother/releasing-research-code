@@ -19,7 +19,7 @@ import random as rnd
 from datetime import datetime
 from datetime import timedelta
 import sys, os
-
+#
 ETF = str(sys.argv[1])
 END_DATE = str(sys.argv[2])
 TRAIN_EPOCHS = int(sys.argv[3])
